@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
+import Home from "./Components/Home";
+import styled from 'styled-components';
+import Sections from './Components/Sections';
+import Seats from './Components/Seats';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppHeader>
+        <h1>CINEFLEX</h1>
+      </AppHeader>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path='/sessoes/:id' element={<Sections />} />
+          <Route path='/assentos/:id' element={<Seats />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
 
 export default App;
+
+
+const AppHeader = styled.header`
+  width: 100%;
+  height: 67px;
+  background-color: #C3CFD9;
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1{
+    font-weight: 400;
+    font-size: 34px;
+    text-align: center;
+    color: #E8833A;
+  }
+`

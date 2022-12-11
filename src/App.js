@@ -4,6 +4,7 @@ import Home from "./Components/Home";
 import styled from 'styled-components';
 import Sections from './Components/Sections';
 import Seats from './Components/Seats';
+import Success from './Components/success';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path='/sessoes/:id' element={<Sections />} />
           <Route path='/assentos/:id' element={<Seats />} />
+          <Route path='/sucesso' element={<Success />} />
         </Routes>
       </BrowserRouter>
     </div>

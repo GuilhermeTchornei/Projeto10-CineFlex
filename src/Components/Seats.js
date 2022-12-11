@@ -21,11 +21,13 @@ export default function Seats() {
     if (movie === undefined) return;
 
     function selectSeat(id) {
+        console.log(id);
         if (!selectedSeats.includes(id)) setSelectedSeats(selectedSeats => [...selectedSeats, id]);
         else
         {
             setSelectedSeats(selectedSeats.filter(s => { return s !== id && s }))
         }
+        console.log(selectedSeats);
     }
 
 
@@ -37,8 +39,22 @@ export default function Seats() {
             name,
             cpf
         }
+        console.log(reservation);
         const request = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", reservation);
-        request.then(navigate("/sucesso"));
+        request.then(() => {
+            ticket = {
+                title: movie.movie.title,
+                date: movie.day.date,
+                hour: movie.name,
+                seats: [],
+                name,
+                cpf
+            };
+            movie.seats.forEach(s => {
+                if (selectedSeats.includes(s.id)) ticket.seats.push(s.name);
+            })
+            navigate("/sucesso");
+        });
         request.catch(response => console.log(response));
     }
 
@@ -47,7 +63,7 @@ export default function Seats() {
             <Title>Selecione o(s) assento(s)</Title>
             <SeatsList>
                 {movie.seats.map(s => {
-                    return <Seat className={selectedSeats.includes(s.id) ? "selected" :
+                    return <Seat key={s.id} className={selectedSeats.includes(s.id) ? "selected" :
                         s.isAvailable ? "available" : "unavailable"}
                         disabled={!s.isAvailable} onClick={() => selectSeat(s.id)}>{s.name}</Seat>
                 })}
@@ -71,7 +87,7 @@ export default function Seats() {
                 <input type="text" placeholder="Digite seu nome..." value={name} onChange={e => setName(e.target.value)} required />
 
                 <label>CPF do comprador:</label>
-                <input type="number" placeholder="Digite seu CPF..." value={cpf} onChange={e => setCpf(e.target.value)} required />
+                <input type="number" placeholder="Digite seu CPF..." value={cpf} onChange={e => setCpf(e.target.value)} required minLength="11" />
                 <Button type="submit">Reservar assento(s)</Button>
             </form>
             <Footer>
@@ -173,3 +189,6 @@ const Caption = styled.div`
         color: #4E5A65;
     }
 `;
+
+
+export let ticket;

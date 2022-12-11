@@ -51,7 +51,16 @@ export const Footer = styled.div`
         color: #293845;
         margin-left: 15px;
     }
+`;
 
+export const Button = styled.button`
+    height: 42px;
+    background-color: #E8833A;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
 `;
 
 export default GlobalStyle;

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components"
-import { Footer, Title } from "../GlobalStyle";
+import { Button, Footer, Title } from "../GlobalStyle";
 
 export default function Sections() {
     const [movie, setMovie] = useState();
@@ -26,7 +26,7 @@ export default function Sections() {
                 return (
                     <Section key={d.id}>
                         <p>{d.weekday} - {d.date}</p>
-                        {d.showtimes.map(st => <button key={st.id} onClick={() => navigate(`/assentos/${st.id}`)}>{st.name}</button>)}
+                        {d.showtimes.map(st => <Button key={st.id} onClick={() => navigate(`/assentos/${st.id}`)}>{st.name}</Button>)}
                     </Section>
                 );
             })}
@@ -56,14 +56,7 @@ const Section = styled.div`
     }
     button{
         width: 83px;
-        height: 43px;
         margin-top: 20px;
         margin-right: 9px;
-        background-color: #E8833A;
-        color: white;
-        font-size: 18px;
-        text-align: center;
-        border: none;
-        border-radius: 3px;
     }
 `;

@@ -9,18 +9,24 @@ export default function Success() {
         <SuccessStyle>
             <Title>Pedido feito com sucesso!</Title>
 
-            <Caption>Filme e sessão</Caption>
-            <Data>{ticket.title}</Data>
-            <Data>{ticket.date} {ticket.hour}</Data>
+            <div data-test="movie-info" >
+                <Caption>Filme e sessão</Caption>
+                <Data>{ticket.title}</Data>
+                <Data>{ticket.date} {ticket.hour}</Data>
+            </div>
 
-            <Caption>Ingressos</Caption>
-            {ticket.seats.map(t => <Data key={t}>Assento {t}</Data>)}
+            <div data-test="seats-info">
+                <Caption>Ingressos</Caption>
+                {ticket.seats.map(t => <Data key={t}>Assento {t}</Data>)}
+            </div>
 
-            <Caption>Comprador</Caption>
-            <Data>Nome: {ticket.name}</Data>
-            <Data>CPF: {ticket.cpf.slice(0, 3)}.{ticket.cpf.slice(3, 6)}.{ticket.cpf.slice(6, 9)}-{ticket.cpf.slice(9)}</Data>
+            <div data-test="client-info">
+                <Caption>Comprador</Caption>
+                <Data>Nome: {ticket.name}</Data>
+                <Data>CPF: {ticket.cpf.slice(0, 3)}.{ticket.cpf.slice(3, 6)}.{ticket.cpf.slice(6, 9)}-{ticket.cpf.slice(9)}</Data>
+            </div>
 
-            <Button onClick={() => navigate("/")}>Voltar pra Home</Button>
+            <Button onClick={() => navigate("/")} data-test="go-home-btn">Voltar pra Home</Button>
         </SuccessStyle>
     );
 }

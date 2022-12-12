@@ -24,14 +24,14 @@ export default function Sections() {
 
             {movie.days.map(d => {
                 return (
-                    <Section key={d.id}>
+                    <Section key={d.id} data-test="movie-day">
                         <p>{d.weekday} - {d.date}</p>
-                        {d.showtimes.map(st => <Button key={st.id} onClick={() => navigate(`/assentos/${st.id}`)}>{st.name}</Button>)}
+                        {d.showtimes.map(st => <Button key={st.id} onClick={() => navigate(`/assentos/${st.id}`)} data-test="showtime">{st.name}</Button>)}
                     </Section>
                 );
             })}
 
-            <Footer>
+            <Footer data-test="footer">
                 <div><img src={movie.posterURL} /></div>
                 <p>{movie.title}</p>
             </Footer>

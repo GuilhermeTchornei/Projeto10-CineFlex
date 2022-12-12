@@ -21,7 +21,7 @@ export default function Home() {
             <MoviesList>
                 {moviesList.map(m => {
                     return (
-                        <Link key={m.id} to={`/sessoes/${m.id}`}>
+                        <Link key={m.id} to={`/sessoes/${m.id}`} data-test="movie">
                             <img src={m.posterURL} />
                         </Link>);
                 })}

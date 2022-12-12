@@ -21,13 +21,11 @@ export default function Seats() {
     if (movie === undefined) return;
 
     function selectSeat(id) {
-        console.log(id);
         if (!selectedSeats.includes(id)) setSelectedSeats(selectedSeats => [...selectedSeats, id]);
         else
         {
             setSelectedSeats(selectedSeats.filter(s => { return s !== id && s }))
         }
-        console.log(selectedSeats);
     }
 
 
@@ -65,7 +63,7 @@ export default function Seats() {
                 {movie.seats.map(s => {
                     return <Seat key={s.id} className={selectedSeats.includes(s.id) ? "selected" :
                         s.isAvailable ? "available" : "unavailable"}
-                        disabled={!s.isAvailable} onClick={() => selectSeat(s.id)}>{s.name}</Seat>
+                        onClick={() => s.isAvailable ? selectSeat(s.id) : alert("Esse assento não está disponíve")} data-test="seat">{s.name}</Seat>
                 })}
             </SeatsList>
             <Caption>
@@ -84,13 +82,13 @@ export default function Seats() {
             </Caption>
             <form onSubmit={bookSeat}>
                 <label>Nome do comprador:</label>
-                <input type="text" placeholder="Digite seu nome..." value={name} onChange={e => setName(e.target.value)} required />
+                <input type="text" placeholder="Digite seu nome..." value={name} onChange={e => setName(e.target.value)} required data-test="client-name" />
 
                 <label>CPF do comprador:</label>
-                <input type="number" placeholder="Digite seu CPF..." value={cpf} onChange={e => setCpf(e.target.value)} required minLength="11" />
-                <Button type="submit">Reservar assento(s)</Button>
+                <input type="text" placeholder="Digite seu CPF..." value={cpf} onChange={e => setCpf(e.target.value)} required minLength="11" data-test="client-cpf" />
+                <Button type="submit" data-test="book-seat-btn">Reservar assento(s)</Button>
             </form>
-            <Footer>
+            <Footer data-test="footer">
                 <div><img src={movie.movie.posterURL} /></div>
                 <p>{movie.movie.title}<br />
                     {movie.day.weekday} - {movie.name}</p>
